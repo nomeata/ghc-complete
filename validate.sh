@@ -13,7 +13,7 @@ else
 fi
 
 echo "Resetting to fingerprint"
-./ghc/utils/fingerprint/fingerprint.py restore -g ghc-validate -f fingerprint
+./ghc-validate/utils/fingerprint/fingerprint.py restore -g ghc-validate -f fingerprint
 
 cd ghc-validate
 
