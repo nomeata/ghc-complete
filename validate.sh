@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+if ! test -d ghc-validate;
+then
+	echo "GHC checkout missing; getting it"
+	git clone git://github.com/ghc/ghc ghc-validate
+	(cd ghc-validate && ./sync-all -r git://github.com/ghc --testsuite get)
+else
+        echo "Updating ghc-validate/"
+	(cd ghc-validate && ./sync-all fetch)
+fi
+
+echo "Resetting to fingerprint"
+./ghc/utils/fingerprint/fingerprint.py restore -g ghc-validate -f fingerprint
+
+cd ghc-validate
+
+rm -f mk/build.mk
+echo 'V = 0' >> mk/build.mk # otherwise we hit log file limits on travis.
+# The quick settings:
+echo 'SRC_HC_OPTS        = -H64m -O0 -fasm' >> mk/build.mk
+echo 'GhcStage1HcOpts    = -O -fasm' >> mk/build.mk
+echo 'GhcStage2HcOpts    = -O0 -fasm -Wall' >> mk/build.mk
+echo 'GhcLibHcOpts       = -O -fasm' >> mk/build.mk
+echo 'SplitObjs          = NO' >> mk/build.mk
+echo 'HADDOCK_DOCS       = NO' >> mk/build.mk
+echo 'BUILD_DOCBOOK_HTML = NO' >> mk/build.mk
+echo 'BUILD_DOCBOOK_PS   = NO' >> mk/build.mk
+echo 'BUILD_DOCBOOK_PDF  = NO' >> mk/build.mk
+echo 'DYNAMIC_GHC_PROGRAMS = NO' >> mk/build.mk
+echo 'GhcLibWays = v'          >> mk/build.mk
+# Lets do it
+perl boot
+make distclean
+./configure 
+make -j3
+make -C testsuite fast THREADS=3 VERBOSE=2 SKIP_PERF_TESTS=YES
+
