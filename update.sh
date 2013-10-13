@@ -9,22 +9,39 @@ then
 	(cd ghc && ./sync-all -r git://github.com/ghc --testsuite get)
 fi
 
-echo "Updated fingerprint file" > msg
+> msg.body
 
-# TODO: Fill msg with information about the pull
-
-echo "Updating GHC to latest state"
-(cd ghc && ./sync-all pull)
+changes=""
+for gitrepo in $(find ghc -name .git -type d|sort) # -type d excludes submodules
+do
+	wd=$(dirname $gitrepo)
+	name=$(basename $wd)
+	n=$(cd $wd; git log master..origin/master --oneline | wc -l)
+	if [ $n -gt 0 ]
+	then
+		echo "Changes in $name, pulling"
+		echo "Changes to $name:" >> msg.body
+		(cd $wd; git log master..origin/master) >> msg.body
+		if [ $n -gt 1 ]
+		then
+			changes="$changes $name($n)"
+		else
+			changes="$changes $name"
+		fi
+		echo "" >> msg.body
+		(cd $wd; git pull)
+	fi
+done
 
 echo "Generating fingerprint"
 ./ghc/utils/fingerprint/fingerprint.py create -g ghc -o fingerprint
 
 if ! git diff --quiet HEAD -- fingerprint
 then
-	git commit -F msg fingerprint
+	(echo "Changes to$changes" ; echo; cat msg.body) | git commit -F - fingerprint
 	git push
 else
 	echo "No changes!"
 fi
 
-rm msg
+rm msg.body
