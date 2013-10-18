@@ -40,7 +40,7 @@ echo "Generating fingerprint"
 if ! git diff --quiet HEAD -- fingerprint
 then
 	(echo "Changes to$changes" ; echo; cat msg.body) | git commit -F - fingerprint
-	git push
+	git push --quiet
 else
 	echo "No changes!"
 fi
