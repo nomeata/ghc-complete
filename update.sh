@@ -16,7 +16,7 @@ for gitrepo in $(find ghc -name .git -type d|sort) # -type d excludes submodules
 do
 	wd=$(dirname $gitrepo)
 	name=$(basename $wd)
-	(cd $wd; git fetch)
+	(cd $wd; git fetch --quiet)
 	n=$(cd $wd; git log master..origin/master --oneline | wc -l)
 	if [ $n -gt 0 ]
 	then
