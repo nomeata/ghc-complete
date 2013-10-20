@@ -39,7 +39,7 @@ echo "Generating fingerprint"
 
 if ! git diff --quiet HEAD -- fingerprint
 then
-	(echo "Changes to$changes" ; echo; cat msg.body) | git commit -F - fingerprint
+	(echo "Changes to$changes" ; echo; cat msg.body) | git commit -F - --author "ghc-complete autocommiter <mail@joachim-breitner.de>" fingerprint
 	git push --quiet
 else
 	echo "No changes!"
