@@ -36,5 +36,8 @@ perl boot
 make distclean
 ./configure 
 make -j3
-make -C testsuite fast THREADS=3 VERBOSE=2 SKIP_PERF_TESTS=YES
-
+make -C testsuite fast THREADS=3 VERBOSE=2 SKIP_PERF_TESTS=YES | tee testlog
+grep '\<0 caused framework failures' testlog
+grep '\<0 unexpected passes' testlog
+grep '\<0 unexpected failures' testlog
+! grep 'Some files are written by multiple tests' testlog
