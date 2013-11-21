@@ -1,3 +1,7 @@
+env:
+ - DEBUG_STAGE2=YES
+ - DEBUG_STAGE2=NO
+
 install:
  - sudo apt-get update
  - sudo apt-get install haskell-platform autoconf libtool make ncurses-dev g++ dblatex docbook-xsl docbook-utils
