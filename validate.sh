@@ -6,7 +6,7 @@ if ! test -d ghc-validate;
 then
 	echo "GHC checkout missing; getting it"
 	git clone git://github.com/ghc/ghc ghc-validate
-	(cd ghc-validate && ./sync-all -r git://github.com/ghc --testsuite get)
+	(cd ghc-validate && ./sync-all -r git://github.com/ghc get)
 else
         echo "Updating ghc-validate/"
 	(cd ghc-validate && ./sync-all fetch)

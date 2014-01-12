@@ -6,7 +6,7 @@ if ! test -d ghc;
 then
 	echo "GHC checkout missing; getting it"
 	git clone git://github.com/ghc/ghc
-	(cd ghc && ./sync-all -r git://github.com/ghc --testsuite get)
+	(cd ghc && ./sync-all -r git://github.com/ghc get)
 fi
 
 > msg.body
