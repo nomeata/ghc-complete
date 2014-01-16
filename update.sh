@@ -35,7 +35,7 @@ do
 done
 
 echo "Updating submodules"
-git submodule update --recursive
+(cd ghc; git submodule update --recursive)
 
 echo "Generating fingerprint"
 ./ghc/utils/fingerprint/fingerprint.py create -g ghc -o fingerprint
