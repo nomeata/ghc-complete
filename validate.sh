@@ -21,12 +21,12 @@ rm -f mk/build.mk
 echo 'V = 0' >> mk/build.mk # otherwise we hit log file limits on travis.
 # The quick settings:
 echo 'SRC_HC_OPTS        = -H64m -O0 -fasm' >> mk/build.mk
-echo 'GhcStage1HcOpts    = -O -fasm -Werror' >> mk/build.mk
+echo 'GhcStage1HcOpts    = -O -fasm -Wall -fno-warn-name-shadowing -Werror' >> mk/build.mk
 if [ "$DEBUG_STAGE2" = 'YES' ]
 then
-echo 'GhcStage2HcOpts    = -O -DDEBUG -fasm -Wall -Werror' >> mk/build.mk
+echo 'GhcStage2HcOpts    = -O -DDEBUG -fasm -Wall -fno-warn-name-shadowing -Werror' >> mk/build.mk
 else
-echo 'GhcStage2HcOpts    = -O -fasm -Wall -Werror' >> mk/build.mk
+echo 'GhcStage2HcOpts    = -O -fasm -Wall-fno-warn-name-shadowing  -Werror' >> mk/build.mk
 fi
 echo 'GhcLibHcOpts       = -O -fasm' >> mk/build.mk
 echo 'SplitObjs          = NO' >> mk/build.mk
