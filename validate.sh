@@ -26,7 +26,7 @@ if [ "$DEBUG_STAGE2" = 'YES' ]
 then
 echo 'GhcStage2HcOpts    = -O -DDEBUG -fasm -Wall -fno-warn-name-shadowing -Werror' >> mk/build.mk
 else
-echo 'GhcStage2HcOpts    = -O -fasm -Wall-fno-warn-name-shadowing  -Werror' >> mk/build.mk
+echo 'GhcStage2HcOpts    = -O -fasm -Wall -fno-warn-name-shadowing  -Werror' >> mk/build.mk
 fi
 echo 'GhcLibHcOpts       = -O -fasm' >> mk/build.mk
 echo 'SplitObjs          = NO' >> mk/build.mk
