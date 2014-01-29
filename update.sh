@@ -2,11 +2,16 @@
 
 set -e
 
+branch_name=$(git symbolic-ref -q HEAD)
+branch_name=${branch_name##refs/heads/}
+branch_name=${branch_name:-HEAD}
+
 if ! test -d ghc;
 then
 	echo "GHC checkout missing; getting it"
 	git clone git://github.com/ghc/ghc
 	(cd ghc && ./sync-all -r git://github.com/ghc get)
+	(cd ghc && ./sync-all checkout $branch_name)
 fi
 
 > msg.body
@@ -17,7 +22,7 @@ do
 	wd=$(dirname $gitrepo)
 	name=$(basename $wd)
 	(cd $wd; git fetch --quiet)
-	n=$(cd $wd; git log master..origin/master --oneline | wc -l)
+	n=$(cd $wd; git log master..origin/$branch_name --oneline | wc -l)
 	if [ $n -gt 0 ]
 	then
 		echo "Changes in $name, pulling"
