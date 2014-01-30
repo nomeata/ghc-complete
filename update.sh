@@ -22,12 +22,12 @@ do
 	wd=$(dirname $gitrepo)
 	name=$(basename $wd)
 	(cd $wd; git fetch --quiet)
-	n=$(cd $wd; git log master..origin/$branch_name --oneline | wc -l)
+	n=$(cd $wd; git log $branch_name..origin/$branch_name --oneline | wc -l)
 	if [ $n -gt 0 ]
 	then
 		echo "Changes in $name, pulling"
 		echo "Changes to $name:" >> msg.body
-		(cd $wd; git log master..origin/master) >> msg.body
+		(cd $wd; git log $branch_name..origin/$branch_name) >> msg.body
 		if [ $n -gt 1 ]
 		then
 			changes="$changes $name($n)"
