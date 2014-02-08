@@ -40,10 +40,15 @@ echo 'BUILD_DOCBOOK_PDF  = NO' >> mk/build.mk
 echo 'DYNAMIC_GHC_PROGRAMS = NO' >> mk/build.mk
 echo 'GhcLibWays = v'          >> mk/build.mk
 # Lets do it
+echo "Booting"
 perl boot
+echo "Cleaning"
 make distclean
+echo "Configuring"
 ./configure 
+echo "Making"
 make -j3
+echo "Testing"
 make -C testsuite fast THREADS=3 VERBOSE=2 SKIP_PERF_TESTS=YES | tee testlog
 grep '\<0 caused framework failures' testlog
 grep '\<0 unexpected passes' testlog
