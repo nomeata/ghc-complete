@@ -17,6 +17,9 @@ echo "Resetting to fingerprint"
 
 cd ghc-validate
 
+echo "Removing dph and dependencies"
+rm -rf libraries/{vector,primitive,random,dph}
+
 rm -f mk/build.mk
 echo 'V = 0' >> mk/build.mk # otherwise we hit log file limits on travis.
 # The quick settings:
