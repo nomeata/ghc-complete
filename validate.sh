@@ -2,6 +2,9 @@
 
 set -e
 
+# https://github.com/travis-ci/travis-ci/issues/1949
+unset PS4
+
 if ! test -d ghc-validate;
 then
 	echo "GHC checkout missing; getting it"
