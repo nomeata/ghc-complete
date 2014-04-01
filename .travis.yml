@@ -1,3 +1,8 @@
+notifications:
+  email:
+    - mail@joachim-breitner.de
+    - ghc-builds@haskell.org
+
 env:
  - DEBUG_STAGE2=YES
  - DEBUG_STAGE2=NO
