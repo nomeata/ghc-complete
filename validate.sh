@@ -46,7 +46,7 @@ echo 'GhcLibWays = v'          >> mk/build.mk
 echo "Booting"
 perl boot
 echo "Cleaning"
-make distclean
+make distclean || true
 echo "Configuring"
 ./configure 
 echo "Making"
