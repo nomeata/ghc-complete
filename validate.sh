@@ -2,10 +2,14 @@
 
 set -e
 
+branch_name=$(git symbolic-ref -q HEAD)
+branch_name=${branch_name##refs/heads/}
+branch_name=${branch_name:-HEAD}
+
 if ! test -d ghc-validate;
 then
 	echo "GHC checkout missing; getting it"
-	git clone git://github.com/ghc/ghc ghc-validate
+	git clone git://github.com/ghc/ghc -b $branch_name ghc-validate
 	(cd ghc-validate && ./sync-all -r git://github.com/ghc get)
 else
         echo "Updating ghc-validate/"
