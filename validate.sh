@@ -6,11 +6,11 @@ set -e
 
 if [ -n "$TRAVIS_BRANCH" ]
 then
+	branch_name="$TRAVIS_BRANCH"
+else
 	branch_name=$(git symbolic-ref -q HEAD)
 	branch_name=${branch_name##refs/heads/}
 	branch_name=${branch_name:-HEAD}
-else
-	branch_name=$TRAVIS_BRANCH
 fi
 echo "On branch $branch_name"
 
