@@ -10,7 +10,7 @@ if ! test -d ghc;
 then
 	echo "GHC checkout missing; getting it"
 	git clone git://github.com/ghc/ghc -b $branch_name
-	(cd ghc && ./sync-all -r git://github.com/ghc get)
+	(cd ghc && ./sync-all -r git://github.com/ghc get --branch $branch_name)
 fi
 
 > msg.body
