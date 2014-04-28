@@ -5,6 +5,7 @@ set -e
 branch_name=$(git symbolic-ref -q HEAD)
 branch_name=${branch_name##refs/heads/}
 branch_name=${branch_name:-HEAD}
+echo "On branch $branch_name"
 
 if ! test -d ghc-validate;
 then
