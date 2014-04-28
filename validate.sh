@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Running $0..."
+
 set -e
 
 if [ -n "$TRAVIS_BRANCH" ]
