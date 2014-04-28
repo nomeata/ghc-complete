@@ -2,9 +2,13 @@
 
 set -e
 
-branch_name=$(git symbolic-ref -q HEAD)
-branch_name=${branch_name##refs/heads/}
-branch_name=${branch_name:-HEAD}
+if [ -n "$TRAVIS_BRANCH"]
+	branch_name=$(git symbolic-ref -q HEAD)
+	branch_name=${branch_name##refs/heads/}
+	branch_name=${branch_name:-HEAD}
+else
+	branch_name=$TRAVIS_BRANCH
+fi
 echo "On branch $branch_name"
 
 if ! test -d ghc-validate;
