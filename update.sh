@@ -9,9 +9,8 @@ branch_name=${branch_name:-HEAD}
 if ! test -d ghc;
 then
 	echo "GHC checkout missing; getting it"
-	git clone git://github.com/ghc/ghc
+	git clone git://github.com/ghc/ghc -b $branch_name
 	(cd ghc && ./sync-all -r git://github.com/ghc get)
-	(cd ghc && ./sync-all checkout $branch_name)
 fi
 
 > msg.body
