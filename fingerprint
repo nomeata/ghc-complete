@@ -1,4 +1,4 @@
-.|1aeea208f042cf7e4e87ac5444398ac689cac99d
+.|9de7cefec507d0d682eab2bf69c4d4547602541d
 libffi-tarballs|a0088d1da0e171849ddb47a46c869856037a01d1
 libraries/Cabal|c226c0de042999bbe4c5c339c6c28a9be7f0c6d1
 libraries/Win32|c51e81a43cd5e9540453bd5ca6da8992245a4774
@@ -32,5 +32,5 @@ libraries/transformers|a59fb93860f84ccd44178dcbbb82cfea7e02cd07
 libraries/unix|dc0e771a282df8ba92892b9619aed0c2b5b1bb7a
 libraries/vector|9baab444a57c4a225ee247fea27187d1892d90bf
 libraries/xhtml|fb9e0bbb69e15873682a9f25d39652099a3ccac1
-utils/haddock|24122a5e391b84284c6d6979375b509d3f15cbea
+utils/haddock|87a6eed7f0d4e646c424a6c0a94b19f2c3d56666
 utils/hsc2hs|4a0f67704d89712f8493a0c7eccffa9243d6ef09
